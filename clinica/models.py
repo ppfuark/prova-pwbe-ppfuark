@@ -2,7 +2,7 @@ import datetime
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.forms import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy
 
 choices = [
     ("CAR", "Cardiologista"),
@@ -34,7 +34,7 @@ class Consulta(models.Model):
         data = self.cleaned_data['data']
 
         if data < datetime.date.today():
-            raise ValidationError(_('Data no Passado')) 
+            raise ValidationError(ugettext_lazy('Data no Passado')) 
         
         return data
     
