@@ -8,7 +8,7 @@ def listar_medicos(request):
         medicos = Medico.objects.filter(especialidade=especialidade)
     else:
         medicos = Medico.objects.all()
-    return render(request, 'listar_medicos.html', {'medicos': medicos})
+    return render(request, 'clinica/listar_medicos.html', {'medicos': medicos})
 
 def criar_consulta(request):
     if request.method == 'POST':
@@ -18,7 +18,7 @@ def criar_consulta(request):
             return redirect('/medicos/')
     else:
         form = ConsultaForm()
-    return render(request, 'form_consulta.html', {'form': form})
+    return render(request, 'clinica/form_consulta.html', {'form': form})
 
 def detalhes_consulta(request, id):
     consulta = get_object_or_404(Consulta, id=id)
