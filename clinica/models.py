@@ -1,45 +1,30 @@
-import datetime
 from django.db import models
 from django.core.validators import MinLengthValidator
-from django.forms import ValidationError
-import django.utils.translation as original_translation
-from django.utils.translation import gettext_lazy
-
-original_translation.ugettext_lazy = gettext_lazy
 
 choices = [
     ("CAR", "Cardiologista"),
     ("ORT", "Ortopedista")
 ]
 choicesStatus = [
-    ("agendado", "agendado"),
-    ("realizado", "realizado"),
-    ("cancelado", "cancelado")
+    ('agendado', 'agendado'), 
+    ('realizado', 'realizado'), 
+    ('cancelado', 'cancelado')
 ]
 
-
 class Medico(models.Model):
-    nome = models.CharField(validators=[MinLengthValidator(5)] , max_length=100)
-    especialidade = models.CharField(max_length=20, choices=choices)
-    crm = models.CharField(max_length=20, unique=True)  
-    email = models.EmailField(blank=True, null=True, default="")
-    
+    nome = models.CharField(max_length=50,  validators=[MinLengthValidator(5)])
+    especialidade = models.CharField(choices=choices, max_length=50)
+    crm = models.CharField(unique=True, max_length=8, validators=[MinLengthValidator(8)])
+    email = models.EmailField(null=True, blank=True)
+
     def __str__(self):
         return self.nome
 
 class Consulta(models.Model):
-    paciente = models.CharField(max_length=100)
+    paciente = models.CharField(max_length=50)
     data = models.DateTimeField()
-    medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, choices=choicesStatus)      
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE, related_name='+')
+    status = models.CharField(choices=choicesStatus, max_length=50)
 
-    def clean_date(self):
-        data = self.cleaned_data['data']
-
-        if data < datetime.date.today():
-            raise ValidationError(gettext_lazy('Data no Passado')) 
-        
-        return data
-    
     def __str__(self):
         return self.paciente
