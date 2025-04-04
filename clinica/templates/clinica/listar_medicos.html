@@ -8,27 +8,25 @@
     <label>Filtrar por especialidade:</label>
     <select name="especialidade">
         <option value="">Todas</option>
-        {% for e in medicos.especialidade %}
-            <option value="{{ e.0 }}">{{ e.0 }}</option>
+        {% for especialidade in medicos.especialidade %}
+            <option value="{{ especialidade.0 }}">{{ especialidade.0 }}</option>
         {% endfor %}
     </select>
     <button type="submit">Filtrar</button>
 </form>
 
-<table>
-    <thead>
-        <tr><th>Nome</th><th>Especialidade</th><th>CRM</th></tr>
-    </thead>
-    <tbody>
+<div>
+    <div>
+        <p><p>Nome</p><p>Especialidade</p><p>CRM</p></p>
+    </div>
+    <div>
         {% for medico in medicos %}
-        <tr>
-            <td>{{ medico.nome }}</td>
-            <td>{{ medico.especialidade }}</td>
-            <td>{{ medico.crm }}</td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="3">Nenhum médico encontrado.</td></tr>
+        <div>
+            <p>{{ medico.nome }}</p>
+            <p>{{ medico.especialidade }}</p>
+            <p>{{ medico.crm }}</p>
+        </div>
         {% endfor %}
-    </tbody>
-</table>
+    </div>
+</div>
 {% endblock %}
