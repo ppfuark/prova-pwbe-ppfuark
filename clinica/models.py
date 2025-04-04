@@ -4,6 +4,11 @@ choices = [
     ("CAR", "Cardiologista"),
     ("ORT", "Ortopedista")
 ]
+choicesStatus = [
+    ("agendado", "agendado"),
+    ("realizado", "realizado"),
+    ("cancelado", "cancelado")
+]
 
 
 class Medico(models.Model):
@@ -16,4 +21,4 @@ class Consulta(models.Model):
     paciente = models.CharField(max_length=100)
     data = models.DateTimeField()
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, choices=['agendado', 'realizado', 'cancelado'])       
+    status = models.CharField(max_length=20, choices=choicesStatus)       
