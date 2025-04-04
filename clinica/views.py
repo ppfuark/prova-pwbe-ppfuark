@@ -13,12 +13,14 @@ def listar_medicos(request):
 def criar_consulta(request):
     if request.method == 'POST':
         form = ConsultaForm(request.POST)
+        
         if form.is_valid():
-            form.save()
-            return redirect('/medicos/')
+            consulta = form.save() 
+            return redirect('detalhes_consulta', id=consulta.id)
     else:
         form = ConsultaForm()
     return render(request, 'clinica/form_consulta.html', {'form': form})
+
 
 def detalhes_consulta(request, id):
     consulta = get_object_or_404(Consulta, id=id)
