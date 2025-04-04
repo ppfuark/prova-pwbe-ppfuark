@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Medico, Consulta
-from .forms import ConsultaForm
+from .form import ConsultaForm
 
 def listar_medicos(request):
     especialidade = request.GET.get('especialidade')
