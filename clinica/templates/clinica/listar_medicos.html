@@ -8,7 +8,7 @@
     <label>Filtrar por especialidade:</label>
     <select name="especialidade">
         <option value="">Todas</option>
-        {% for e in medicos.values_list "especialidade" %}
+        {% for e in medicos.especialidade %}
             <option value="{{ e.0 }}">{{ e.0 }}</option>
         {% endfor %}
     </select>
