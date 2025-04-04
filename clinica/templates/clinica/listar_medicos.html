@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <h1>My Tennis Club - List of all members</h1>
+{% endblock %}
+
+
+{% block content %}
+  <h2>Members</h2>
+  
+  <ul>
+    {% for medico in medicos %}
+      <li><a href="details/{{ medico.crm }}">{{ medico.nome }} | {{ medico.especialidade }} | {{ medico.email }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
